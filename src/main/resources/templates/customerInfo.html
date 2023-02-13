@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>客户信息</title>
+
+</head>
+<body>
+<!--<div id="app">-->
+<!--    <a th:href="@{/testAjax}" @click="testAjax">testAjax</a><br>-->
+<!--</div>-->
+<div>
+    <textarea id="w3review" name="w3review" rows="4" cols="50">
+At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
+</textarea>
+</div>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript" src="js/axios.min.js"></script>
+<script type="text/javascript">
+
+    var vm = new Vue({
+        data: {
+            a: 1
+        },
+        created: function () {
+
+            axios({
+                    method:"post",
+                    url:"[[@{/customerOperation}]]",
+                    params:{
+                        corp_id:6,
+                        data_Type:1,
+                        s_date:"2023-01-25",
+                        e_date:"2023-01-30",
+                        s_week:4,
+                        type:2
+                    }
+            }).then(function (response) {
+                alert(response.data);
+                const dom = document.getElementById('w3review');
+                let data=JSON.stringify(response.data);
+                dom.value=data;
+
+            });
+
+            // `this` 指向 vm 实例
+            // console.log('a is:', this.a)
+            // axios({
+            //     method:"post",
+            //     url:'https://dev.scrmapi.jihuigj.com/api/open-statistics/work-user-data',
+            //     params:{
+            //         corp_id:6,
+            //         s_data:"2023-01-25",
+            //         e_data:"2023-01-30"
+            //     }
+            // }).then(function (response) {
+            //     const dom = document.getElementById('w3review');
+            //     dom.value=response.data;
+            //     alert(response.data);
+            // });
+
+        }
+    })
+
+    var vue = new Vue({
+        el:"#app",
+        methods:{
+            testAjax:function (event) {
+                // axios({
+                //     method:"post",
+                //     url:event.target.href,
+                //     params:{
+                //         username:"admin",
+                //         password:"123456"
+                //     }
+                // }).then(function (response) {
+                //     const dom = document.getElementById('w3review');
+                //     dom.value=response.data;
+                //     alert(response.data);
+                // });
+                // event.preventDefault();
+
+                axios({
+                    method:"post",
+                    url:'https://dev.scrmapi.jihuigj.com/api/open-statistics/work-user-data',
+                    params:{
+                        corp_id:6,
+                        s_data:"2023-01-25",
+                        e_data:"2023-01-30"
+                    }
+                }).then(function (response) {
+                    const dom = document.getElementById('w3review');
+                    dom.value=response.data;
+                    alert(response.data);
+                });
+                event.preventDefault();
+
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
