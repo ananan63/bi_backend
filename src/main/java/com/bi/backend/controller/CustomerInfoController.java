@@ -13,13 +13,17 @@ public class CustomerInfoController {
 
     @RequestMapping("/customerIndex")
     public String customerIndex(Model model){
-        model.addAttribute("c0","https://dev.scrmapi.jihuigj.com/api/open-statistics/work-user-data");
-        Map c1 = new HashMap();
-        c1.put("corp_id",6);
-        c1.put("s_data","2023-01-25");
-        c1.put("e_data","2023-01-30");
-        model.addAttribute("c1",c1);
-        return "customerInfo";
+//        model.addAttribute("c0","https://dev.scrmapi.jihuigj.com/api/open-statistics/work-user-data");
+//        Map c1 = new HashMap();
+        model.addAttribute("corp_id",6);
+        model.addAttribute("s_date","2023-01-25");
+        model.addAttribute("e_date","2023-01-30");
+        model.addAttribute("data_Type",1);
+        model.addAttribute("s_week",4);
+        model.addAttribute("type",2);
+
+//        model.addAttribute("c1",c1);
+        return "forward:/customerOperation";
     }
 
 
